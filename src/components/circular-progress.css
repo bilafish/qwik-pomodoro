@@ -1,0 +1,37 @@
+svg {
+  position: absolute;
+  width: 366px;
+  height: 366px;
+  z-index: 1000;
+  transform: rotate(-90deg);
+  top: 0;
+  left: 0;
+}
+svg circle {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #f87070;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 943;
+  stroke-dashoffset: calc(943 * 0.25);
+  transform: translate(30px, 35px);
+}
+.percent {
+  position: relative;
+  width: 366px;
+  height: 366px;
+  border-radius: 50%;
+  z-index: 1000;
+  background: #161932;
+}
+
+h1 {
+  margin-top: 32%;
+  margin-bottom: 0;
+}
+
+h3 {
+  margin-right: -15px;
+}
