@@ -1,11 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { Page, Title } from './styles.css'
 
 export default component$(() => {
   return (
-    <>
-      <p>pomodoro</p>
-    </>
+    <Page>
+      <Title>pomodoro</Title>
+    </Page>
   );
 });
 
