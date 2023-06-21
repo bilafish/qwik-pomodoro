@@ -7,4 +7,7 @@ export const Title = styled.p`
 
 export const Page = styled.div`
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
