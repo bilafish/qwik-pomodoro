@@ -13,5 +13,8 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 };
 
 export default component$(() => {
-  return <Slot />;
+  return <>
+    <Slot />
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "498a28d757654f39a1ad7341696f3d63"}'></script>
+    </>;
 });
