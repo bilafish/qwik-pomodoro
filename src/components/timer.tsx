@@ -6,6 +6,7 @@ import {
 } from "@builder.io/qwik";
 import styles from "./timer.css?inline";
 import { CircularProgress } from "./circular-progress";
+import type { Signal } from "@builder.io/qwik";
 
 function msToMMSS(ms: number) {
   const min = Math.floor((ms / 1000 / 60) % 60);
@@ -18,7 +19,7 @@ function msToMMSS(ms: number) {
 export const Timer = component$(() => {
   const timerDuration = 10000;
   const isRunning = useSignal(false);
-  const dateTimeStarted = useSignal(null);
+  const dateTimeStarted: Signal<Date | null> = useSignal(null);
   const timeElapsed = useSignal(0);
   const timeLeft = useSignal(msToMMSS(timerDuration));
   useStyles$(styles);

@@ -25,7 +25,7 @@ export const CircularProgress = component$(
               dateTimeStarted.value = new Date();
             } else {
               const now = new Date();
-              timeElapsed.value = now.getTime() - dateTimeStarted.value.getTime();
+              timeElapsed.value = now.getTime() - dateTimeStarted.value!.getTime();
               dateTimeStarted.value = null;
             }
             isRunning.value = !isRunning.value;
