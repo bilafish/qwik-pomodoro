@@ -1,22 +1,26 @@
 import type { Signal } from "@builder.io/qwik";
 import { component$, useStyles$ } from "@builder.io/qwik";
 import styles from "./circular-progress.css?inline";
+import { Circle, dynamicDashOffset } from "./circle.css";
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 interface CircularProgressProps {
   isRunning: Signal<boolean>;
   dateTimeStarted: Signal<Date | null>;
   timeLeft: string;
   timeElapsed: Signal<number>;
+  percentageLeft: number;
 }
 
 export const CircularProgress = component$(
-  ({ isRunning, dateTimeStarted, timeLeft, timeElapsed }: CircularProgressProps) => {
+  ({ isRunning, dateTimeStarted, timeLeft, timeElapsed, percentageLeft }: CircularProgressProps) => {
+    const percentageElapsed = 1 - percentageLeft;
+    const computed = Math.min(percentageElapsed, 1);
     useStyles$(styles);
     return (
       <div class="percent">
         <svg>
-          <circle cx="150" cy="150" r="150"></circle>
-          <circle cx="150" cy="150" r="150"></circle>
+          <circle cx="150" cy="150" r="150" class={Circle} style={assignInlineVars({ [dynamicDashOffset]: `calc(943 * ${computed})` })}></circle>
         </svg>
         <h1>{timeLeft}</h1>
         <button

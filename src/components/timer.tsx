@@ -3,6 +3,7 @@ import {
   useStyles$,
   useSignal,
   useVisibleTask$,
+  useComputed$,
 } from "@builder.io/qwik";
 import styles from "./timer.css?inline";
 import { CircularProgress } from "./circular-progress";
@@ -17,11 +18,13 @@ function msToMMSS(ms: number) {
 }
 
 export const Timer = component$(() => {
-  const timerDuration = 10000;
+  const timerDuration = 1500000;
   const isRunning = useSignal(false);
   const dateTimeStarted: Signal<Date | null> = useSignal(null);
   const timeElapsed = useSignal(0);
-  const timeLeft = useSignal(msToMMSS(timerDuration));
+  const timeLeft = useSignal(timerDuration);
+  const timeLeftString = useComputed$(() => msToMMSS(timeLeft.value));
+  const percentageLeft = useComputed$(() => Math.floor(timeLeft.value / 1000) / Math.floor(timerDuration / 1000));
   useStyles$(styles);
   useVisibleTask$(({ track, cleanup }) => {
     track(() => isRunning.value);
@@ -32,7 +35,12 @@ export const Timer = component$(() => {
         const now = new Date();
         const duration = now.getTime() - dateTimeStarted.value!.getTime();
         const remaining = timerDuration - duration - timeElapsed.value;
-        timeLeft.value = remaining > 0 ? msToMMSS(remaining) : msToMMSS(0);
+        if (remaining <= 0) {
+          timeLeft.value = 0;
+          isRunning.value = false;
+        } else {
+          timeLeft.value = remaining;
+        }
       }, 500);
     }
     cleanup(() => clearInterval(id));
@@ -42,8 +50,9 @@ export const Timer = component$(() => {
       <CircularProgress
         isRunning={isRunning}
         dateTimeStarted={dateTimeStarted}
-        timeLeft={timeLeft.value}
+        timeLeft={timeLeftString.value}
         timeElapsed={timeElapsed}
+        percentageLeft={percentageLeft.value}
       />
     </div>
   );
