@@ -3,6 +3,7 @@ svg {
   width: 366px;
   height: 366px;
   z-index: 1000;
+  pointer-events: none;
   transform: rotate(-90deg);
   top: 0;
   left: 0;
@@ -34,4 +35,11 @@ h1 {
 
 h3 {
   margin-right: -15px;
+}
+
+button {
+  background: none;
+  border: none;
+  color: #D7E0FF;
+  cursor: pointer;
 }
