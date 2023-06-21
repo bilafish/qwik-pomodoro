@@ -20,7 +20,7 @@ export const Timer = component$(() => {
   const isRunning = useSignal(false);
   const dateTimeStarted = useSignal(null);
   const timeElapsed = useSignal(0);
-  const timeLeft = useSignal("");
+  const timeLeft = useSignal(msToMMSS(timerDuration));
   useStyles$(styles);
   useVisibleTask$(({ track, cleanup }) => {
     track(() => isRunning.value);
